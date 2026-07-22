@@ -10,8 +10,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Amora',
-  tagline: 'Ambiente de Mapeamento de Orçamentos e Requisições Ágeis',
+  title: 'AMORA',
+  tagline: 'Ambiente para Mapeamento de Orçamentos e Requisições Ágeis',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -83,7 +83,7 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'My Site',
+        title: 'AMORA',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
@@ -111,7 +111,7 @@ const config = {
             items: [
               {
                 label: 'Documentação',
-                to: '/docs/intro',
+                to: '/docs/',
               },
             ],
           },
@@ -146,7 +146,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Media Marketing AMORA`,
       },
       prism: {
         theme: prismThemes.github,
