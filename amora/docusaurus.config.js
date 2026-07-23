@@ -5,7 +5,6 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
-import CodeBlock from '@theme/CodeBlock';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -56,8 +55,8 @@ const config = {
           
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+      
+  
         },
         theme: {
           customCss: './src/css/custom.css',
