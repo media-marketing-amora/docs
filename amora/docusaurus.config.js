@@ -85,7 +85,7 @@ const config = {
       navbar: {
         title: 'AMORA',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'AMORA Logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -116,32 +116,11 @@ const config = {
             ],
           },
           {
-            title: 'Community',
+            title: 'Links',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                label: 'Figma',
+                href: 'https://www.figma.com/design/vWTVhaZgPeFnW6shHHuj8V/AMORA---Prototipa%C3%A7%C3%A3o',
               },
             ],
           },
