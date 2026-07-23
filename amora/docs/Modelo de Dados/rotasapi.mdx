@@ -1,0 +1,249 @@
+# Rotas da API
+
+## Requests (Solicitações)
+
+### 1.1. Listar todas as solicitações
+
+Retorna uma lista de todas as solicitações do usuário, ou de todos os usuários se for administrador.
+
+**Método:** GET
+
+**Rota:** `/requests`
+
+**Payload:** Não possui
+
+**Exemplo de resposta (200 OK):**
+
+```json
+[
+  {
+    "request_id": 1,
+    "subject": "Assunto da solicitação",
+    "status": "in_progress",
+    "due_date": "2026-07-31",
+    "quick_description": "Descrição rápida opcional da solicitação",
+    "full_price": 50.0,
+    "cost_center": "Centro de custo inserido no formulário",
+    "creator": "Nome do usuário que criou a solicitação",
+    "request_items": [
+      {
+        "request_items_id": 1,
+        "description": "Descrição do serviço selecionado no formulário",
+        "unit_price": 50.0,
+        "task": {
+          "task_id": 1,
+          "name": "Tarefa",
+          "hours": 1
+        }
+      }
+    ]
+  }
+]
+```
+
+### 1.2. Buscar uma solicitação específica
+
+Retorna os detalhes de uma solicitação a partir do seu ID.
+
+**Método:** GET
+
+**Rota:** `/requests/{request_id}`
+
+**Payload:** Não possui
+
+**Exemplo de resposta (200 OK):**
+
+```json
+{
+  "request_id": 1,
+  "subject": "Assunto da solicitação",
+  "status": "in_progress",
+  "due_date": "2026-07-31",
+  "quick_description": "Descrição rápida opcional da solicitação",
+  "full_price": 50.0,
+  "cost_center": "Centro de custo inserido no formulário",
+  "creator": "Nome do usuário que criou a solicitação",
+  "request_items": [
+    {
+      "request_items_id": 1,
+      "description": "Descrição do serviço selecionado no formulário",
+      "unit_price": 50.0,
+      "task": {
+        "task_id": 1,
+        "name": "",
+        "hours": 1
+      }
+    }
+  ]
+}
+```
+
+### 1.3. Criar uma solicitação
+
+Cria uma nova solicitação de projeto e calcula automaticamente as horas e o valor do orçamento.
+
+**Método:** POST
+
+**Rota:** `/requests`
+
+**Payload:**
+
+```json
+{
+  "subject": "Assunto da solicitação",
+  "quick_description": "Descrição rápida opcional da solicitação",
+  "due_date": "2026-07-31",
+  "cost_center": "Centro de custo inserido no formulário",
+  "items": [
+    {
+      "task_id": 1,
+      "description": "Descrição do serviço selecionado no formulário"
+    }
+  ]
+}
+```
+
+**Exemplo de resposta (200 OK):**
+
+```json
+{
+  "request_id": 1,
+  "subject": "Assunto da solicitação",
+  "full_price": 50,
+  "status": "under_analysis"
+}
+```
+
+### 1.4. Alterar o status da solicitação
+
+Atualiza o status de uma solicitação (movimentação do card no painel Kanban).
+
+**Método:** PATCH
+
+**Rota:** `/requests/{request_id}/status`
+
+**Payload:**
+
+```json
+{
+  "status": "todo"
+}
+```
+
+**Exemplo de resposta (200 OK):**
+
+```json
+{
+  "subject": "Assunto da solicitação",
+  "quick_description": "Descrição rápida opcional da solicitação",
+  "due_date": "2026-07-31",
+  "cost_center": "Centro de custo inserido no formulário",
+  "created_by": "ID do usuário que criou a solicitação",
+  "created_at": "2026-07-31T11:00:00",
+  "request_id": 1,
+  "status": "todo",
+  "full_price": 50.0,
+  "color": "Cor da solicitação",
+  "updated_by": "ID do usuário que fez a atualização",
+  "updated_at": "2026-07-31T12:00:00"
+}
+```
+
+---
+
+## Tasks (Tarefas)
+
+### 2.1. Listar todas as tarefas
+
+Retorna a lista de tipos de serviços cadastrados com a estimativa de horas por unidade.
+
+**Método:** GET
+
+**Rota:** `/tasks`
+
+**Payload:** Não possui
+
+**Exemplo de resposta (200 OK):**
+
+```json
+[
+  {
+    "task_id": 1,
+    "name": "Nome da tarefa",
+    "hours": 8,
+    "price": 400.0
+  },
+  {
+    "task_id": 2,
+    "name": "Nome da tarefa",
+    "hours": 1,
+    "price": 50.0
+  }
+]
+```
+
+---
+
+## Notifications (Notificações)
+
+### 3.1. Listar todas as notificações
+
+Retorna uma lista de notificações destinadas a um usuário.
+
+**Método:** GET
+
+**Rota:** `/notifications`
+
+**Payload:** Não possui
+
+**Exemplo de resposta (200 OK):**
+
+```json
+[
+  {
+    "notification_id": 1,
+    "label": "Sua solicitação foi aprovada!",
+    "read": false,
+    "request_id": 1,
+    "recipient_id": "ID do usuário destino da notificação",
+    "request": {
+      "request_id": 1,
+      "subject": "Assunto da solicitação que emitiu a notificação",
+      "full_price": 50.0,
+      "status": "todo"
+    }
+  }
+]
+```
+
+### 3.2. Marcar notificações como lidas
+
+Atualiza o estado das notificações do usuário para o status de lidas.
+
+**Método:** PATCH
+
+**Rota:** `/notifications/read-all`
+
+**Payload:** Não possui
+
+**Exemplo de resposta (204 NO CONTENT):**
+
+```text
+Não é recebido nenhum dado, somente a resposta com status 204.
+```
+
+### 3.3. Excluir notificações
+
+Remove as notificações marcadas como lidas do usuário.
+
+**Método:** DELETE
+
+**Rota:** `/notifications`
+
+**Payload:** Não possui
+
+**Exemplo de resposta (204 NO CONTENT):**
+
+```text
+Não é recebido nenhum dado, somente a resposta com status 204.
+```
